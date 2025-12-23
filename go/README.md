@@ -14,6 +14,7 @@ A command-line tool for downloading music from Bandcamp. This is a Go port of th
 - ✅ Concurrent downloads with configurable limits
 - ✅ Retry logic with exponential backoff
 - ✅ Skip existing files
+- ✅ Interactive TUI mode (Bubble Tea)
 
 ## Installation
 
@@ -24,11 +25,15 @@ A command-line tool for downloading music from Bandcamp. This is a Go port of th
 git clone https://github.com/handiism/BandcampDownloader.git
 cd BandcampDownloader/go
 
-# Build
+# Build CLI
 go build -o bandcamp-dl ./cmd/bandcamp-dl
+
+# Build TUI (interactive mode)
+go build -o bandcamp-tui ./cmd/bandcamp-tui
 
 # Or install globally
 go install ./cmd/bandcamp-dl
+go install ./cmd/bandcamp-tui
 ```
 
 ### Requirements
@@ -37,7 +42,7 @@ go install ./cmd/bandcamp-dl
 
 ## Usage
 
-### Basic Usage
+### CLI Mode
 
 ```bash
 # Download an album
@@ -50,7 +55,20 @@ go install ./cmd/bandcamp-dl
 ./bandcamp-dl -url "https://artist.bandcamp.com" -discography
 ```
 
-### Supported URL Formats
+### Interactive TUI Mode
+
+```bash
+# Launch interactive terminal UI
+./bandcamp-tui
+```
+
+The TUI provides:
+
+- URL input with text editing
+- Toggle options for discography and playlist
+- Real-time download progress
+- Colorful styled output
+- Keyboard controls (d: discography, p: playlist, enter: start, esc: quit)
 
 | Type   | Format                                        |
 | ------ | --------------------------------------------- |

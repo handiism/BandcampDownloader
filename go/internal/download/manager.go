@@ -48,10 +48,10 @@ type Manager struct {
 	playlist     *audio.PlaylistCreator
 	imageService *ioutils.ImageService
 
-	albums       []*model.Album
-	totalBytes   int64
-	receivedBytes int64
-	totalFiles   int32
+	albums          []*model.Album
+	totalBytes      int64
+	receivedBytes   int64
+	totalFiles      int32
 	downloadedFiles int32
 
 	onProgress func(ProgressEvent)
@@ -90,7 +90,7 @@ func NewManager(settings *config.Settings, onProgress func(ProgressEvent)) *Mana
 // Initialize fetches album info from the input URLs.
 func (m *Manager) Initialize(ctx context.Context, inputURLs string) error {
 	urls := m.parseInputURLs(inputURLs)
-	
+
 	var allAlbumURLs []string
 	for _, inputURL := range urls {
 		albumURLs, err := m.getAlbumURLs(ctx, inputURL)
@@ -104,7 +104,7 @@ func (m *Manager) Initialize(ctx context.Context, inputURLs string) error {
 	// Fetch album info
 	for _, albumURL := range allAlbumURLs {
 		m.progress(ProgressEvent{Message: fmt.Sprintf("Fetching album info: %s", albumURL), Level: LevelVerbose})
-		
+
 		html, err := m.httpClient.GetString(ctx, albumURL)
 		if err != nil {
 			m.progress(ProgressEvent{Message: fmt.Sprintf("Error fetching %s: %v", albumURL, err), Level: LevelError})
@@ -146,6 +146,15 @@ func (m *Manager) StartDownloads(ctx context.Context) error {
 func (m *Manager) GetProgress() (received, total int64, filesReceived, filesTotal int32) {
 	return atomic.LoadInt64(&m.receivedBytes), m.totalBytes,
 		atomic.LoadInt32(&m.downloadedFiles), m.totalFiles
+}
+
+// GetAlbumNames returns the names of all initialized albums.
+func (m *Manager) GetAlbumNames() []string {
+	names := make([]string, len(m.albums))
+	for i, album := range m.albums {
+		names[i] = fmt.Sprintf("%s - %s (%d tracks)", album.Artist, album.Title, len(album.Tracks))
+	}
+	return names
 }
 
 func (m *Manager) parseInputURLs(input string) []string {

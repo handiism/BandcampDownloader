@@ -15,23 +15,26 @@ import (
 func main() {
 	// Command line flags
 	var (
-		urlsFlag       = flag.String("url", "", "Bandcamp URL(s) to download (comma-separated or newline-separated)")
-		outputFlag     = flag.String("output", "", "Output directory (overrides config)")
-		configFlag     = flag.String("config", "", "Path to config file")
+		urlsFlag        = flag.String("url", "", "Bandcamp URL(s) to download (comma-separated or newline-separated)")
+		outputFlag      = flag.String("output", "", "Output directory (overrides config)")
+		configFlag      = flag.String("config", "", "Path to config file")
 		discographyFlag = flag.Bool("discography", false, "Download entire artist discography")
-		playlistFlag   = flag.Bool("playlist", false, "Create playlist file")
-		verboseFlag    = flag.Bool("verbose", false, "Show verbose output")
-		dryRunFlag     = flag.Bool("dry-run", false, "Parse URLs without downloading")
+		playlistFlag    = flag.Bool("playlist", false, "Create playlist file")
+		verboseFlag     = flag.Bool("verbose", false, "Show verbose output")
+		dryRunFlag      = flag.Bool("dry-run", false, "Parse URLs without downloading")
 	)
 
 	flag.Parse()
 
+	// CLI mode - require URL
 	if *urlsFlag == "" && flag.NArg() == 0 {
 		fmt.Println("Bandcamp Downloader - Download music from Bandcamp")
 		fmt.Println()
 		fmt.Println("Usage:")
 		fmt.Println("  bandcamp-dl -url <URL> [options]")
 		fmt.Println("  bandcamp-dl <URL> [options]")
+		fmt.Println()
+		fmt.Println("For interactive mode, use: bandcamp-tui")
 		fmt.Println()
 		flag.PrintDefaults()
 		os.Exit(1)

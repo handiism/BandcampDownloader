@@ -48,7 +48,7 @@ const (
 //	creator := NewPlaylistCreator(FormatM3U, true)
 //	content := creator.CreatePlaylist(album)
 //	os.WriteFile(album.PlaylistPath, []byte(content), 0644)
-//	
+//
 //	// Result:
 //	// #EXTM3U
 //	// #EXTINF:180,Artist - Song Title
@@ -63,7 +63,7 @@ type PlaylistCreator struct {
 // Parameters:
 //   - format: The playlist format to generate
 //   - extended: For M3U format, whether to include #EXTINF lines
-//               (ignored for other formats)
+//     (ignored for other formats)
 func NewPlaylistCreator(format PlaylistFormat, extended bool) *PlaylistCreator {
 	return &PlaylistCreator{
 		format:   format,

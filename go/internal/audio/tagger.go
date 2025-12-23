@@ -99,7 +99,7 @@ func DefaultTagConfig() *TagConfig {
 // Example:
 //
 //	tagger := NewTagger(DefaultTagConfig())
-//	
+//
 //	// After downloading track
 //	err := tagger.SaveTags(track, album, artworkBytes)
 //	if err != nil {

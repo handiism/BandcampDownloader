@@ -15,8 +15,8 @@ func TestDiscography_GetAlbumURLs(t *testing.T) {
 		wantContain string
 	}{
 		{
-			name: "single album link",
-			html: `<html><body><a href="/album/test-album">Album</a></body></html>`,
+			name:        "single album link",
+			html:        `<html><body><a href="/album/test-album">Album</a></body></html>`,
 			wantCount:   1,
 			wantErr:     false,
 			wantContain: "/album/test-album",
@@ -63,7 +63,7 @@ func TestDiscography_GetAlbumURLs(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			urls, err := d.GetAlbumURLs(tt.html)
-			
+
 			if tt.wantErr {
 				if err == nil {
 					t.Errorf("expected error but got none")
@@ -111,7 +111,7 @@ func TestParser_ParseAlbumPage(t *testing.T) {
 	</html>`
 
 	pathCfg := &model.PathConfig{
-		DownloadsPath:         "/tmp/test/{artist}/{album}",
+		DownloadsPath:          "/tmp/test/{artist}/{album}",
 		CoverArtFileNameFormat: "{album}",
 		PlaylistFileNameFormat: "{album}",
 		PlaylistFormat:         model.PlaylistFormatM3U,
@@ -150,8 +150,8 @@ func TestExtractAlbumData(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "valid data-tralbum",
-			html: `<html><script data-tralbum="{&quot;current&quot;:{&quot;title&quot;:&quot;Test&quot;}}"></script></html>`,
+			name:    "valid data-tralbum",
+			html:    `<html><script data-tralbum="{&quot;current&quot;:{&quot;title&quot;:&quot;Test&quot;}}"></script></html>`,
 			wantErr: false,
 		},
 		{

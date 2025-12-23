@@ -84,7 +84,7 @@ func TestPlaylistCreator_ZPL(t *testing.T) {
 
 func TestPlaylistCreator_XMLEscape(t *testing.T) {
 	albumCfg := &model.PathConfig{
-		DownloadsPath:         "/music",
+		DownloadsPath:          "/music",
 		CoverArtFileNameFormat: "{album}",
 		PlaylistFileNameFormat: "{album}",
 	}
@@ -109,7 +109,7 @@ func TestPlaylistCreator_XMLEscape(t *testing.T) {
 
 func createTestAlbum() *model.Album {
 	albumCfg := &model.PathConfig{
-		DownloadsPath:         "/music/{artist}/{album}",
+		DownloadsPath:          "/music/{artist}/{album}",
 		CoverArtFileNameFormat: "{album}",
 		PlaylistFileNameFormat: "{album}",
 	}

@@ -11,14 +11,14 @@ import (
 // Settings holds all configuration options.
 type Settings struct {
 	// Download settings
-	DownloadsPath              string  `json:"downloads_path"`
+	DownloadsPath               string  `json:"downloads_path"`
 	MaxConcurrentAlbumsDownload int     `json:"max_concurrent_albums"`
 	MaxConcurrentTracksDownload int     `json:"max_concurrent_tracks"`
-	DownloadMaxRetries         int     `json:"download_max_retries"`
-	DownloadRetryCooldown      float64 `json:"download_retry_cooldown"`
-	DownloadRetryExponent      float64 `json:"download_retry_exponent"`
-	AllowedFileSizeDifference  float64 `json:"allowed_file_size_difference"`
-	DownloadArtistDiscography  bool    `json:"download_artist_discography"`
+	DownloadMaxRetries          int     `json:"download_max_retries"`
+	DownloadRetryCooldown       float64 `json:"download_retry_cooldown"`
+	DownloadRetryExponent       float64 `json:"download_retry_exponent"`
+	AllowedFileSizeDifference   float64 `json:"allowed_file_size_difference"`
+	DownloadArtistDiscography   bool    `json:"download_artist_discography"`
 
 	// File naming
 	FileNameFormat         string `json:"file_name_format"`
@@ -35,9 +35,9 @@ type Settings struct {
 	ConvertCoverArtToJPG    bool `json:"convert_cover_art_to_jpg"`
 
 	// Playlist settings
-	CreatePlaylist   bool   `json:"create_playlist"`
-	PlaylistFormat   string `json:"playlist_format"` // m3u, pls, wpl, zpl
-	M3UExtended      bool   `json:"m3u_extended"`
+	CreatePlaylist bool   `json:"create_playlist"`
+	PlaylistFormat string `json:"playlist_format"` // m3u, pls, wpl, zpl
+	M3UExtended    bool   `json:"m3u_extended"`
 
 	// Tag settings
 	ModifyTags bool `json:"modify_tags"`
@@ -52,14 +52,14 @@ type Settings struct {
 func DefaultSettings() *Settings {
 	homeDir, _ := os.UserHomeDir()
 	return &Settings{
-		DownloadsPath:              filepath.Join(homeDir, "Music", "Bandcamp", "{artist}", "{album}"),
+		DownloadsPath:               filepath.Join(homeDir, "Music", "Bandcamp", "{artist}", "{album}"),
 		MaxConcurrentAlbumsDownload: 1,
 		MaxConcurrentTracksDownload: 10,
-		DownloadMaxRetries:         7,
-		DownloadRetryCooldown:      0.2,
-		DownloadRetryExponent:      4.0,
-		AllowedFileSizeDifference:  0.05,
-		DownloadArtistDiscography:  false,
+		DownloadMaxRetries:          7,
+		DownloadRetryCooldown:       0.2,
+		DownloadRetryExponent:       4.0,
+		AllowedFileSizeDifference:   0.05,
+		DownloadArtistDiscography:   false,
 
 		FileNameFormat:         "{tracknum} {artist} - {title}.mp3",
 		CoverArtFileNameFormat: "{album}",
@@ -133,7 +133,7 @@ func (s *Settings) ToPathConfig() *model.PathConfig {
 	}
 
 	return &model.PathConfig{
-		DownloadsPath:         s.DownloadsPath,
+		DownloadsPath:          s.DownloadsPath,
 		CoverArtFileNameFormat: s.CoverArtFileNameFormat,
 		PlaylistFileNameFormat: s.PlaylistFileNameFormat,
 		PlaylistFormat:         pf,

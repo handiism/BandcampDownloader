@@ -20,15 +20,15 @@ import (
 // Example usage:
 //
 //	parser := NewParser(pathConfig, trackConfig)
-//	
+//
 //	resp, _ := http.Get("https://artist.bandcamp.com/album/name")
 //	html, _ := io.ReadAll(resp.Body)
-//	
+//
 //	album, err := parser.ParseAlbumPage(string(html))
 //	if err != nil {
 //	    log.Fatal(err)
 //	}
-//	
+//
 //	fmt.Printf("Album: %s by %s\n", album.Title, album.Artist)
 //	for _, track := range album.Tracks {
 //	    fmt.Printf("  %d. %s\n", track.Number, track.Title)
@@ -161,7 +161,7 @@ func (p *Parser) extractLyrics(htmlContent string, album *model.Album) {
 
 		// Find the lyrics content within the element
 		remaining := htmlContent[startIdx:]
-		
+
 		// Look for the lyrics text between tags
 		contentStart := strings.Index(remaining, ">")
 		if contentStart == -1 {

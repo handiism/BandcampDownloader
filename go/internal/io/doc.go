@@ -10,10 +10,10 @@
 //
 //	// Copy a file
 //	err := ioutils.CopyFile(ctx, "/src/file.mp3", "/dst/file.mp3")
-//	
+//
 //	// Write data to file
 //	err := ioutils.WriteFile(ctx, "/path/to/file.txt", []byte("content"))
-//	
+//
 //	// Ensure directory exists
 //	err := ioutils.EnsureDir("/path/to/new/directory")
 //
@@ -28,10 +28,10 @@
 // The ImageService handles cover art manipulation:
 //
 //	svc := ioutils.NewImageService()
-//	
+//
 //	// Resize image to fit within 500x500
 //	resized, _ := svc.ResizeImage(ctx, imageData, 500, 500)
-//	
+//
 //	// Convert to JPEG
 //	jpeg, _ := svc.ConvertToJPEG(ctx, pngData)
 package ioutils

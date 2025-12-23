@@ -26,15 +26,15 @@ var ErrNoAlbumFound = errors.New("no album found on page")
 // Example usage:
 //
 //	disco := NewDiscography()
-//	
+//
 //	resp, _ := http.Get("https://artist.bandcamp.com/music")
 //	html, _ := io.ReadAll(resp.Body)
-//	
+//
 //	urls, err := disco.GetAlbumURLs(string(html))
 //	if err != nil {
 //	    log.Fatal(err)
 //	}
-//	
+//
 //	for _, url := range urls {
 //	    fullURL := "https://artist.bandcamp.com" + url
 //	    fmt.Println(fullURL)

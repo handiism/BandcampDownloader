@@ -34,7 +34,7 @@ func TestSanitizeFileName(t *testing.T) {
 
 func TestAlbum_PathComputation(t *testing.T) {
 	cfg := &PathConfig{
-		DownloadsPath:         "/music/{artist}/{album}",
+		DownloadsPath:          "/music/{artist}/{album}",
 		CoverArtFileNameFormat: "{album}",
 		PlaylistFileNameFormat: "{album}",
 		PlaylistFormat:         PlaylistFormatM3U,
@@ -59,7 +59,7 @@ func TestAlbum_PathComputation(t *testing.T) {
 
 func TestAlbum_NoArtwork(t *testing.T) {
 	cfg := &PathConfig{
-		DownloadsPath:         "/music/{artist}/{album}",
+		DownloadsPath:          "/music/{artist}/{album}",
 		CoverArtFileNameFormat: "{album}",
 		PlaylistFileNameFormat: "{album}",
 		PlaylistFormat:         PlaylistFormatM3U,
@@ -79,7 +79,7 @@ func TestAlbum_NoArtwork(t *testing.T) {
 
 func TestTrack_PathComputation(t *testing.T) {
 	albumCfg := &PathConfig{
-		DownloadsPath:         "/music/{artist}/{album}",
+		DownloadsPath:          "/music/{artist}/{album}",
 		CoverArtFileNameFormat: "{album}",
 		PlaylistFileNameFormat: "{album}",
 		PlaylistFormat:         PlaylistFormatM3U,

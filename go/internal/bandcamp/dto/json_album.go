@@ -32,10 +32,10 @@ func (bt *BandcampTime) UnmarshalJSON(data []byte) error {
 
 	// Try multiple formats
 	formats := []string{
-		"02 Jan 2006 15:04:05 MST",   // "01 Jan 2023 00:00:00 GMT"
-		"2 Jan 2006 15:04:05 MST",    // "1 Jan 2023 00:00:00 GMT"
-		time.RFC3339,                  // Standard format
-		"2006-01-02T15:04:05Z07:00",  // ISO format
+		"02 Jan 2006 15:04:05 MST",  // "01 Jan 2023 00:00:00 GMT"
+		"2 Jan 2006 15:04:05 MST",   // "1 Jan 2023 00:00:00 GMT"
+		time.RFC3339,                // Standard format
+		"2006-01-02T15:04:05Z07:00", // ISO format
 	}
 
 	for _, format := range formats {

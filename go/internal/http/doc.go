@@ -9,10 +9,10 @@
 // # Basic Usage
 //
 //	client := http.NewClient()
-//	
+//
 //	// Fetch HTML page
 //	html, err := client.GetString(ctx, "https://artist.bandcamp.com/album/name")
-//	
+//
 //	// Download file with progress callback
 //	client.DownloadFile(ctx, mp3URL, "/path/to/file.mp3", func(written, total int64) {
 //	    fmt.Printf("%.1f%%\n", float64(written)/float64(total)*100)

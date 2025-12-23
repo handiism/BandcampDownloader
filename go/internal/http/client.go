@@ -20,10 +20,10 @@ import (
 // Example usage:
 //
 //	client := NewClient()
-//	
+//
 //	// Fetch HTML content
 //	html, err := client.GetString(ctx, "https://artist.bandcamp.com/album/name")
-//	
+//
 //	// Download file with progress
 //	err = client.DownloadFile(ctx, mp3URL, "/path/to/file.mp3", func(written, total int64) {
 //	    percent := float64(written) / float64(total) * 100
@@ -66,13 +66,13 @@ func NewClient() *Client {
 type ProgressWriter struct {
 	// Writer is the underlying writer to write data to.
 	Writer io.Writer
-	
+
 	// Total is the expected total bytes (from Content-Length header).
 	Total int64
-	
+
 	// Written is the current number of bytes written.
 	Written int64
-	
+
 	// OnUpdate is called after each Write with current progress.
 	// Parameters are (bytesWritten, totalExpected).
 	OnUpdate func(written, total int64)
@@ -179,7 +179,7 @@ func (c *Client) GetFileSize(ctx context.Context, url string) (int64, error) {
 //   - url: URL to download from
 //   - destPath: Local file path to save to
 //   - onProgress: Optional callback called with (bytesWritten, totalBytes)
-//                 Pass nil to disable progress tracking
+//     Pass nil to disable progress tracking
 //
 // Example:
 //

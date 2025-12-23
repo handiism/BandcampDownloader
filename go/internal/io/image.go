@@ -19,10 +19,10 @@ import (
 // Example usage:
 //
 //	svc := NewImageService()
-//	
+//
 //	// Download cover art
 //	imageData, _ := downloadCoverArt(url)
-//	
+//
 //	// Resize to max 500x500 and convert to JPEG
 //	resized, _ := svc.ResizeImage(ctx, imageData, 500, 500)
 //	jpeg, _ := svc.ConvertToJPEG(ctx, resized)
@@ -80,7 +80,7 @@ func (s *ImageService) ResizeImage(ctx context.Context, data []byte, maxWidth, m
 
 	// Create new image with calculated dimensions
 	dst := image.NewRGBA(image.Rect(0, 0, width, height))
-	
+
 	// Use Catmull-Rom for high-quality scaling
 	draw.CatmullRom.Scale(dst, dst.Bounds(), img, bounds, draw.Over, nil)
 

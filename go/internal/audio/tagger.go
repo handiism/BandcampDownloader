@@ -1,6 +1,7 @@
 package audio
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/bogem/id3v2"
@@ -57,8 +58,14 @@ type TagConfig struct {
 	// Year controls the TYER (Year) frame.
 	Year TagEditAction
 
+	// Date controls the TDRC (Recording time) frame (ID3v2.4).
+	Date TagEditAction
+
 	// TrackNumber controls the TRCK (Track number) frame.
 	TrackNumber TagEditAction
+
+	// DiscNumber controls the TPOS (Part of a set) frame.
+	DiscNumber TagEditAction
 
 	// TrackTitle controls the TIT2 (Title) frame.
 	TrackTitle TagEditAction
@@ -81,7 +88,9 @@ func DefaultTagConfig() *TagConfig {
 		AlbumArtist: TagModify,
 		Album:       TagModify,
 		Year:        TagModify,
+		Date:        TagModify,
 		TrackNumber: TagModify,
+		DiscNumber:  TagModify,
 		TrackTitle:  TagModify,
 		Lyrics:      TagModify,
 		Comments:    TagEmpty,
@@ -179,12 +188,38 @@ func (t *Tagger) updateStringTags(tag *id3v2.Tag, track *model.Track, album *mod
 		tag.SetAlbum(album.Title)
 	}
 
-	// Year (TYER)
+	// Year (TYER) - ID3v2.3
 	switch t.config.Year {
 	case TagEmpty:
-		tag.SetYear("")
+		tag.DeleteFrames("TYER")
 	case TagModify:
-		tag.SetYear(album.ReleaseDate.Format("2006"))
+		tag.AddTextFrame("TYER", id3v2.EncodingUTF8, album.ReleaseDate.Format("2006"))
+	}
+
+	// Date (TDRC) - ID3v2.4
+	switch t.config.Date {
+	case TagEmpty:
+		tag.DeleteFrames("TDRC")
+	case TagModify:
+		tag.AddTextFrame("TDRC", id3v2.EncodingUTF8, album.ReleaseDate.Format("2006-01-02"))
+	}
+
+	// Track Number (TRCK)
+	switch t.config.TrackNumber {
+	case TagEmpty:
+		tag.DeleteFrames("TRCK")
+	case TagModify:
+		tag.AddTextFrame("TRCK", id3v2.EncodingUTF8, fmt.Sprintf("%d", track.Number))
+	}
+
+	// Disc Number (TPOS)
+	switch t.config.DiscNumber {
+	case TagEmpty:
+		tag.DeleteFrames("TPOS")
+	case TagModify:
+		if track.DiscNumber > 0 {
+			tag.AddTextFrame("TPOS", id3v2.EncodingUTF8, fmt.Sprintf("%d", track.DiscNumber))
+		}
 	}
 
 	// Track Title (TIT2)
@@ -193,6 +228,14 @@ func (t *Tagger) updateStringTags(tag *id3v2.Tag, track *model.Track, album *mod
 		tag.SetTitle("")
 	case TagModify:
 		tag.SetTitle(track.Title)
+	}
+
+	// Album Artist (TPE2)
+	switch t.config.AlbumArtist {
+	case TagEmpty:
+		tag.DeleteFrames("TPE2")
+	case TagModify:
+		tag.AddTextFrame("TPE2", id3v2.EncodingUTF8, album.Artist)
 	}
 
 	// Lyrics (USLT)

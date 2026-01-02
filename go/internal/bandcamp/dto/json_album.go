@@ -90,9 +90,11 @@ func (ja *JSONAlbum) ToAlbum(pathCfg *model.PathConfig, trackCfg *model.TrackCon
 	album := model.NewAlbum(ja.Artist, title, artworkURL, releaseDate, pathCfg)
 
 	// Convert tracks (skip those without files)
+	// TODO: Handle multiple discs. For now, always assume disc 1.
+	discNumber := 1
 	for _, jt := range ja.Tracks {
 		if jt.File != nil {
-			track := jt.ToTrack(album, trackCfg)
+			track := jt.ToTrack(album, discNumber, trackCfg)
 			album.Tracks = append(album.Tracks, track)
 		}
 	}

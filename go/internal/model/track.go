@@ -9,7 +9,7 @@ import (
 // Track represents a single track within an album.
 //
 // Track contains metadata for one song including:
-//   - Track number and title for ID3 tagging
+//   - Track number, disc number and title for ID3 tagging
 //   - Duration for playlist generation
 //   - Lyrics (if available on Bandcamp)
 //   - MP3 download URL
@@ -21,7 +21,7 @@ import (
 // Example:
 //
 //	cfg := &TrackConfig{FileNameFormat: "{tracknum} {title}.mp3"}
-//	track := NewTrack(album, 1, "Song Title", 180.5, "", mp3URL, cfg)
+//	track := NewTrack(album, 1, 1, "Song Title", 180.5, "", mp3URL, cfg)
 //	// track.Path = "/music/Artist/Album/01 Song Title.mp3"
 type Track struct {
 	// Album is a reference to the parent album.
@@ -29,6 +29,9 @@ type Track struct {
 
 	// Number is the track number (1-indexed).
 	Number int
+
+	// DiscNumber is the disc number (1-indexed).
+	DiscNumber int
 
 	// Title is the track title.
 	Title string
@@ -73,6 +76,7 @@ type TrackConfig struct {
 //
 // Parameters:
 //   - album: The parent album (required for path computation and metadata)
+//   - discNumber: Disc number (1-indexed)
 //   - number: Track number (1-indexed, used for filename and ID3 tag)
 //   - title: Track title
 //   - duration: Track length in seconds (used for playlists)
@@ -82,14 +86,15 @@ type TrackConfig struct {
 //
 // The file path is computed using the album's path and the configured filename format.
 // Invalid filename characters are automatically replaced with underscores.
-func NewTrack(album *Album, number int, title string, duration float64, lyrics, mp3URL string, cfg *TrackConfig) *Track {
+func NewTrack(album *Album, discNumber, number int, title string, duration float64, lyrics, mp3URL string, cfg *TrackConfig) *Track {
 	track := &Track{
-		Album:    album,
-		Number:   number,
-		Title:    title,
-		Duration: duration,
-		Lyrics:   lyrics,
-		Mp3URL:   mp3URL,
+		Album:      album,
+		DiscNumber: discNumber,
+		Number:     number,
+		Title:      title,
+		Duration:   duration,
+		Lyrics:     lyrics,
+		Mp3URL:     mp3URL,
 	}
 
 	track.Path = track.parseFilePath(cfg)

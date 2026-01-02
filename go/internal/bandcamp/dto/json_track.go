@@ -21,7 +21,7 @@ type JSONMp3File struct {
 }
 
 // ToTrack converts JSONTrack to a model.Track.
-func (jt *JSONTrack) ToTrack(album *model.Album, cfg *model.TrackConfig) *model.Track {
+func (jt *JSONTrack) ToTrack(album *model.Album, discNumber int, cfg *model.TrackConfig) *model.Track {
 	// Fix URL if it starts with "//"
 	mp3URL := jt.File.URL
 	if strings.HasPrefix(mp3URL, "//") {
@@ -34,5 +34,5 @@ func (jt *JSONTrack) ToTrack(album *model.Album, cfg *model.TrackConfig) *model.
 		number = *jt.Number
 	}
 
-	return model.NewTrack(album, number, jt.Title, jt.Duration, jt.Lyrics, mp3URL, cfg)
+	return model.NewTrack(album, discNumber, number, jt.Title, jt.Duration, jt.Lyrics, mp3URL, cfg)
 }

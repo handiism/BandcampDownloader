@@ -90,7 +90,7 @@ func TestTrack_PathComputation(t *testing.T) {
 
 	releaseDate := time.Date(2023, 5, 15, 0, 0, 0, 0, time.UTC)
 	album := NewAlbum("Artist", "Album", "", releaseDate, albumCfg)
-	track := NewTrack(album, 1, "Track Title", 180.5, "", "http://example.com/track.mp3", trackCfg)
+	track := NewTrack(album, 1, 1, "Track Title", 180.5, "", "http://example.com/track.mp3", trackCfg)
 
 	expectedPath := "/music/Artist/Album/01 Track Title.mp3"
 	if track.Path != expectedPath {

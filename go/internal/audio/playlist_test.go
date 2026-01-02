@@ -93,7 +93,7 @@ func TestPlaylistCreator_XMLEscape(t *testing.T) {
 	}
 
 	album := model.NewAlbum("Artist & Co", "Album <Special>", "", time.Now(), albumCfg)
-	track := model.NewTrack(album, 1, "Track & \"Quote\"", 180, "", "http://example.com", trackCfg)
+	track := model.NewTrack(album, 1, 1, "Track & \"Quote\"", 180, "", "http://example.com", trackCfg)
 	album.Tracks = append(album.Tracks, track)
 
 	creator := NewPlaylistCreator(FormatWPL, false)
@@ -119,8 +119,8 @@ func createTestAlbum() *model.Album {
 
 	album := model.NewAlbum("Test Artist", "Test Album", "", time.Now(), albumCfg)
 
-	track1 := model.NewTrack(album, 1, "track1", 180, "", "http://example.com/1.mp3", trackCfg)
-	track2 := model.NewTrack(album, 2, "track2", 200, "", "http://example.com/2.mp3", trackCfg)
+	track1 := model.NewTrack(album, 1, 1, "track1", 180, "", "http://example.com/1.mp3", trackCfg)
+	track2 := model.NewTrack(album, 1, 2, "track2", 200, "", "http://example.com/2.mp3", trackCfg)
 
 	album.Tracks = []*model.Track{track1, track2}
 
